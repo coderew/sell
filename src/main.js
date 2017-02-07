@@ -14,6 +14,10 @@ var sellerrouter = new VueRouter({
   base: __dirname,
   routes: [
     {
+      path: '/',
+      redirect: '/goods'
+    },
+    {
       path: '/goods',
       components: {main: goods}
     },
@@ -25,7 +29,6 @@ var sellerrouter = new VueRouter({
       path: '/seller',
       components: {main: seller}
     }
-
     ]
 });
 
