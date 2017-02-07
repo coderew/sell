@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-header></v-header>
+    <v-header :seller="seller"></v-header>
     <div class="tab ">
       <div class="tab-item">
         <!-- 使用 router-link 组件来导航. -->
