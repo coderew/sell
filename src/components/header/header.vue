@@ -68,9 +68,7 @@
 
   export default{
       props: {
-          seller: {
-
-          }
+          seller: {}
       },
       data() {
         return {

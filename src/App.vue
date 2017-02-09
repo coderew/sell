@@ -38,7 +38,6 @@
             if (response.errno === ERR_OK) {
               // 路由匹配到的组件将渲染在这里
               this.seller = response.data;
-              console.log(this.seller);
             }
         });
     },
