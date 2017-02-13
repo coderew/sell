@@ -17,7 +17,7 @@
     </div>
     <!-- 路由出口 -->
     <!-- 路由匹配到的组件将渲染在这里 -->
-    <router-view id="main-content" class="main-content" name="main"></router-view>
+    <router-view id="main-content" class="main-content" name="main" :seller="seller"></router-view>
   </div>
 </template>
 
