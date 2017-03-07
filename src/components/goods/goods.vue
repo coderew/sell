@@ -40,7 +40,7 @@
           </ul>
       </div>
       <shopCart ref="shopcart" :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopCart>
-      <!--<food :food="selectedFood" ref="food"></food>-->
+      <food :food="selectedFood" ref="food"></food>
   </div>
 
 </template>
@@ -119,7 +119,7 @@
           }
           this.selectedFood = food;
           //  调用子组件的方法
-          //  this.$refs.food.show();
+          this.$refs.food.show();
         },
         _initScroll() {
           this.meunScroll = new BScroll(this.$el.querySelector('.menu-wrapper'), {
