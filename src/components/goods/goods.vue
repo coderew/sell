@@ -15,7 +15,7 @@
               <li v-for="item in goods" class="food-list food-list-hook">
                   <h1 class="title">{{item.name}}</h1>
                   <ul>
-                      <li v-for="food in item.foods" class="food-item  border-1px">
+                      <li @click="selectFood(food, $event)" v-for="food in item.foods" class="food-item  border-1px">
                         <div class="icon">
                             <img width="57px" height="57px" :src="food.icon">
                         </div>
@@ -38,15 +38,18 @@
                   </ul>
               </li>
           </ul>
+      </div>
+      <shopCart ref="shopcart" :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopCart>
+      <!--<food :food="selectedFood" ref="food"></food>-->
   </div>
-      <shopCart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopCart>
-  </div>
+
 </template>
 
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll';
   import shopCart from 'components/shopCart/shopCart';
   import cartcontroll from 'components/cartcontroll/cartcontroll';
+  import food from 'components/food/food';
 
   const ERR_OK = 0;
   export default {
@@ -55,11 +58,13 @@
         type: Object
       }
     },
+
     data() {
       return {
         goods: [],
         listHeight: [],
-        scrollY: 0
+        scrollY: 0,
+        selectedFood: {}
       };
     },
     computed: {
@@ -108,6 +113,14 @@
           let el = foodList[index];
           this.foodsScroll.scrollToElement(el, 300);
         },
+        selectFood(food, event) {
+          if (!event._constructed) {
+            return;
+          }
+          this.selectedFood = food;
+          //  调用子组件的方法
+          //  this.$refs.food.show();
+        },
         _initScroll() {
           this.meunScroll = new BScroll(this.$el.querySelector('.menu-wrapper'), {
               click: true
@@ -134,13 +147,14 @@
     },
     components: {
       shopCart,
-      cartcontroll
+      cartcontroll,
+      food
     }
 };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-    @import "../../common/stylus/mixin";
+    @import "../../common/stylus/mixin.styl"
 
     .goods
         display: flex
