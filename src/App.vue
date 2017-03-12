@@ -17,11 +17,12 @@
     </div>
     <!-- 路由出口 -->
     <!-- 路由匹配到的组件将渲染在这里 -->
-    <router-view id="main-content" class="main-content" name="main" :seller="seller"></router-view>
+    <router-view id="main-content" class="main-content" name="main" :seller="seller" keep-alive></router-view>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import {urlParse} from 'common/js/util';
   import header from 'components/header/header.vue';
 
   const ERR_OK = 0;
@@ -29,15 +30,24 @@
   export default {
     data () {
       return {
-          seller: {}
+          seller: {
+            id: (() => {
+              let queryParam = urlParse();
+              console.log(queryParam);
+              return queryParam.id;
+            })()
+          }
       };
     },
     created () {
-        this.$http.get('/api/seller').then((response) => {
+        this.$http.get('/api/seller?id=' + this.seller.id).then((response) => {
             response = response.body;
             if (response.errno === ERR_OK) {
               // 路由匹配到的组件将渲染在这里
-              this.seller = response.data;
+//              this.seller = response.data;
+//              console.log(this.seller.id);
+              this.seller = Object.assign({}, this.seller, response.data);
+              console.log(this.seller.id);
             }
         });
     },
