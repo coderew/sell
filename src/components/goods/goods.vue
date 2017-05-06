@@ -185,6 +185,7 @@
                 .icon
                   display: inline-block
                   vertical-align: top
+
                   width: 12px
                   height: 12px
                   margin-right: 2px
